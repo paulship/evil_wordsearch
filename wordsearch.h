@@ -1,8 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifndef _WORDSEARCH_H
 #define _WORDSEARCH_H
+
+#include <stdint.h>
 
 /*
     Structure to represent the wordsearch. When you create a wordsearch, a pointer to one of these will be returned. Don't
@@ -11,20 +10,21 @@
 typedef struct
 {
     /* Pointer to the word that we want to avoid having in the wordsearch */
-    const char* initial_word;
+    const char* initial_word_ptr;
     /* Length of the original word in the wordsearch */
     uint8_t initial_word_len;
-    /* Bitmap used for uninitialised letters */
-    uint32_t unique_letters_map;
     /* Pointer to the start of the letter grid. note - not a string! This numbergrid size is determined by grid*height */
-    char* lettergrid;
-    /* Array similar to that above indicating possible letters for each entry in the grid */
-    uint32_t* lettergrid_poss;
+    char* lettergrid_ptr;
     /* Defines the size of the grid */
     uint16_t lettergrid_width;
     uint16_t lettergrid_height;
 } wordsearch_t;
 
 
+extern wordsearch_t* wordsearch_ctor( const char* const word, const uint16_t width, const uint16_t height );
+extern void wordsearch_dtor( wordsearch_t* const data_ptr );
+
+extern void wordsearch_fill_blanks( wordsearch_t* const data_ptr );
+extern void wordsearch_print( wordsearch_t* data_ptr );
 
 #endif /* _WORDSEARCH_H */
