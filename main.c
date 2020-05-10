@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "wordsearch.h"
 
 int main( void )
 {
     printf("Starting evil wordsearch generator.\n");
+
+    srand(time(NULL));
 
     wordsearch_t* wordsearch_ptr = wordsearch_ctor("bug",20,10);
 
