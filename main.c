@@ -9,7 +9,7 @@ int main( void )
 
     srand(time(NULL));
 
-    wordsearch_t* wordsearch_ptr = wordsearch_ctor("bug",160,50);
+    wordsearch_t* wordsearch_ptr = wordsearch_ctor("bug",160,60);
 
     if( wordsearch_ptr == NULL )
     {
@@ -20,11 +20,11 @@ int main( void )
         wordsearch_fill_blanks( wordsearch_ptr );
         do
         {
-            printf("\nWordsearch is now:\n");
-            wordsearch_print( wordsearch_ptr );
+            //printf("\nWordsearch is now:\n");
+            //wordsearch_print( wordsearch_ptr );
             wordsearch_fill_blanks( wordsearch_ptr );
-            printf("\nRefilled blanks:\n");
-            wordsearch_print( wordsearch_ptr );
+            //printf("\nRefilled blanks:\n");
+            //wordsearch_print( wordsearch_ptr );
         } while ( wordsearch_blank_words( wordsearch_ptr ) );
 
 
