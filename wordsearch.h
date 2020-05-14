@@ -2,6 +2,7 @@
 #define _WORDSEARCH_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /*
     Structure to represent the wordsearch. When you create a wordsearch, a pointer to one of these will be returned. Don't
@@ -26,5 +27,6 @@ extern void wordsearch_dtor( wordsearch_t* const data_ptr );
 
 extern void wordsearch_fill_blanks( wordsearch_t* const data_ptr );
 extern void wordsearch_print( wordsearch_t* data_ptr );
+extern bool wordsearch_blank_words( wordsearch_t* const data_ptr );
 
 #endif /* _WORDSEARCH_H */
