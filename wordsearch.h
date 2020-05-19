@@ -21,10 +21,15 @@ typedef struct
     uint16_t lettergrid_height;
 } wordsearch_t;
 
-
+/*
+    Constructor and destructor
+*/
 extern wordsearch_t* wordsearch_ctor( const char* const word, const uint16_t width, const uint16_t height );
 extern void wordsearch_dtor( wordsearch_t* const data_ptr );
 
+/*
+    Operator functions
+*/
 extern void wordsearch_fill_blanks( wordsearch_t* const data_ptr );
 extern void wordsearch_print( wordsearch_t* data_ptr );
 extern bool wordsearch_blank_words( wordsearch_t* const data_ptr );
