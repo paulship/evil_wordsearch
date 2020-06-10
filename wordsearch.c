@@ -10,6 +10,9 @@
 static bool check_and_destroy( wordsearch_t* const data_ptr, const int32_t x_start, const int32_t y_start, const int32_t x_step, const int32_t y_step );
 static int32_t calc_idx( const int32_t x_size, const int32_t x_pos, const int32_t y_pos );
 
+/*
+    Constructor
+*/
 wordsearch_t* wordsearch_ctor( const char* const word, const uint16_t width, const uint16_t height )
 {
     wordsearch_t* ret_ptr = malloc( sizeof(wordsearch_t) );
@@ -39,14 +42,19 @@ wordsearch_t* wordsearch_ctor( const char* const word, const uint16_t width, con
     return( ret_ptr );
 }
 
-
+/*
+    Destructor
+*/
 void wordsearch_dtor( wordsearch_t* const data_ptr )
 {
     free( data_ptr->lettergrid_ptr );
     free( data_ptr );
 }
 
-
+/*
+    Fills any squares in the wordsearch that are currently blank with a random character
+    from the character pool.
+*/
 void wordsearch_fill_blanks( wordsearch_t* const data_ptr )
 {
     const uint32_t gridsize = ((uint32_t)data_ptr->lettergrid_height) * ((uint32_t)data_ptr->lettergrid_width);
@@ -62,7 +70,9 @@ void wordsearch_fill_blanks( wordsearch_t* const data_ptr )
     }
 }
 
-
+/*
+    Print the wordsearch to stdout.
+*/
 void wordsearch_print( wordsearch_t* const data_ptr )
 {
     char* char_ptr = data_ptr->lettergrid_ptr;
@@ -79,6 +89,13 @@ void wordsearch_print( wordsearch_t* const data_ptr )
 
 }
 
+/*
+    This function looks for any instance in the wordsearch where out initial word can be found
+    and, if it does exist, replaces one of the characters in the word with a space. At the end,
+    there will be no instances of the initial word in the wordsearch. The function will return
+    TRUE if any ssquares have been blanked out, and FALSE if nothing was blanked out, meaning
+    we now have a completed evil wordsearch.
+*/
 bool wordsearch_blank_words( wordsearch_t* const data_ptr )
 {
     bool changes_made = false;
@@ -103,7 +120,16 @@ bool wordsearch_blank_words( wordsearch_t* const data_ptr )
     return( changes_made );
 }
 
+/*
+    This is an internal function used to check if the target word exists in a particular
+    location in the grid. The initial x and y positions are provided, as are the
+    x and y step values. The step values should be one of [+1,0,-1] and control if the
+    search is being done upwards, downwards, to the left or right. 
 
+    If the target word is present, one of the characters in the word will be replaced with
+    a space, and the function returns TRUE. Function returns FALSE if the word is not
+    present and no changes have been made. 
+*/
 static bool check_and_destroy( wordsearch_t* const data_ptr, const int32_t x_start, const int32_t y_start, const int32_t x_step, const int32_t y_step )
 {
     /* Get a local copy of some important data on the stack */
@@ -149,7 +175,10 @@ static bool check_and_destroy( wordsearch_t* const data_ptr, const int32_t x_sta
     return( match_found );
 }
 
-
+/*
+    Converts an x and y position into a grid location, depending on the width of the
+    lettergrid.
+*/
 static int32_t calc_idx( const int32_t x_size, const int32_t x_pos, const int32_t y_pos )
 {
     return y_pos * x_size + x_pos;
